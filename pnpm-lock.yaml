@@ -1,6 +1,7 @@
 dependencies:
   '@vueuse/core': 4.1.0_vue@3.0.5
   '@vueuse/head': 0.2.3_vue@3.0.5
+  axios: 0.21.1
   nprogress: 0.2.0
   prism-theme-vars: 0.1.4
   vue: 3.0.5
@@ -1642,7 +1643,7 @@ packages:
   /@vueuse/core/4.1.0_vue@3.0.5:
     dependencies:
       '@vueuse/shared': 4.1.0_vue@3.0.5
-      vue-demi: 0.6.0_vue@3.0.5
+      vue-demi: 0.7.3_vue@3.0.5
     dev: false
     peerDependencies:
       vue: '*'
@@ -1657,7 +1658,7 @@ packages:
       integrity: sha512-bAFZyUlT6+CVIwMcUw3TrtuhG/BfjS+UV5T8oH30tGPnVvqIsNuRCnNt9EbVd1GxHRDZD0K41515B5NiXPt84A==
   /@vueuse/shared/4.1.0_vue@3.0.5:
     dependencies:
-      vue-demi: 0.6.0_vue@3.0.5
+      vue-demi: 0.7.3_vue@3.0.5
     dev: false
     peerDependencies:
       vue: '*'
@@ -1863,6 +1864,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
+  /axios/0.21.1:
+    dependencies:
+      follow-redirects: 1.13.3
+    dev: false
+    resolution:
+      integrity: sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
   /babel-eslint/10.1.0_eslint@7.19.0:
     dependencies:
       '@babel/code-frame': 7.12.11
@@ -2962,6 +2969,17 @@ packages:
     dev: true
     resolution:
       integrity: sha512-zAoAQiudy+r5SvnSw3KJy5os/oRJYHzrzja/tBDqrZtNhUw8bt6y8OBzMWcjWr+8liV8Eb6yOhw8WZ7VFZ5ZzA==
+  /follow-redirects/1.13.3:
+    dev: false
+    engines:
+      node: '>=4.0'
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    resolution:
+      integrity: sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==
   /foreach/2.0.5:
     dev: true
     resolution:
@@ -5411,16 +5429,20 @@ packages:
       fsevents: 2.3.2
     resolution:
       integrity: sha512-QNxIRajidVG3ejikBUb17NgCV1bJ9UyKHBdItgw1O/ljQ1hBoph5I2/DrviqV4G9H3WP7teXk5vwQWuCVS9fqQ==
-  /vue-demi/0.6.0_vue@3.0.5:
+  /vue-demi/0.7.3_vue@3.0.5:
     dependencies:
       vue: 3.0.5
     dev: false
     hasBin: true
     peerDependencies:
+      '@vue/composition-api': ^1.0.0-beta.1
       vue: ^2.6.0 || >=3.0.0-rc.1
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
     requiresBuild: true
     resolution:
-      integrity: sha512-8GEJa0mHJpYJeGeq5fD1pJct2kfdl30PHfmL1NaJ97mgKPyKojlIRt/3inGBK4Y0ylCI6T5vOo3chwpqDOq/Hw==
+      integrity: sha512-vrzM26H4CZCXBf/eu4T8nks6o7qgziYM52myk8bg+atw4qYqpeWJf5c82W8VdmgGfSIdh9ulOOe9+GeLc3Z/8A==
   /vue-eslint-parser/7.3.0_eslint@7.19.0:
     dependencies:
       debug: 4.3.1
@@ -5831,6 +5853,7 @@ specifiers:
   '@vueuse/core': ^4.1.0
   '@vueuse/head': ^0.2.3
   autoprefixer: ^10.2.4
+  axios: ^0.21.1
   cross-env: ^7.0.3
   eslint: ^7.19.0
   markdown-it-prism: ^2.1.4

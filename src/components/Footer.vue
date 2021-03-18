@@ -1,37 +1,33 @@
-<script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import { isDark, toggleDark } from '~/logics'
+<script lang="ts">
+import { useUsers } from '../services/useUsers'
 
-const { t, availableLocales, locale } = useI18n()
+export default {
+async setup () {
+const { fetchUsers, userList, userCount } = useUsers()
 
-const toggleLocales = () => {
-  // change to some real logic
-  const locales = availableLocales
-  locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length]
+
+await fetchUsers()
+console.log(userList)
+return { userList, userCount}
+}
 }
 </script>
 
 <template>
-  <nav class="text-xl mt-6">
-    <router-link class="icon-btn mx-2" to="/" :title="t('button.home')">
-      <carbon-campsite />
-    </router-link>
+<div>
+<div
+    v-if="userList.length === 0"
+    class="article-preview"
+  >
+    No articles are here... yet.
+  </div>
 
-    <a class="icon-btn mx-2" :title="t('button.toggle_dark')" @click="toggleDark">
-      <carbon-moon v-if="isDark" />
-      <carbon-sun v-else />
-    </a>
-
-    <a class="icon-btn mx-2" :title="t('button.toggle_langs')" @click="toggleLocales">
-      <carbon-language />
-    </a>
-
-    <router-link class="icon-btn mx-2" to="/about" :title="t('button.about')">
-      <carbon-dicom-overlay />
-    </router-link>
-
-    <a class="icon-btn mx-2" rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank" title="GitHub">
-      <carbon-logo-github />
-    </a>
-  </nav>
+<ul v-else>
+    <li
+    v-for="user in userList"
+    :key="user.userId"
+    >
+hello</li>
+</ul>
+</div>
 </template>
