@@ -10,16 +10,10 @@ export function useUsers() {
       userList.value = []
 
     const response = await users.getAll()
-
         userList.value = response
-
         userCount.value = response.length
-      console.log(userList)
+
     }
-
-    const { active: usersDownloading, run: runWrappedFetchUsers } = createAsyncProcess(fetchUsers)
-
-    
 
     return {
         fetchUsers,
@@ -28,25 +22,43 @@ export function useUsers() {
     }
 }
 
+export function useUser() {
 
-import { Ref, ref } from 'vue'
+    const userDetail = ref<User>()
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-interface CreateAsyncProcessReturn<T extends (...args: any[]) => any> {
-  active: Ref<boolean>
-  run: (...args: Parameters<T>) => Promise<ReturnType<T>>
+
+    async function fetchUser() {
+
+    const response = await users.getById(13327)
+        userDetail.value = response
+
+    }
+
+    return {
+        fetchUser,
+        userDetail
+    }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function createAsyncProcess<T extends (...args: any[]) => any> (fn: T): CreateAsyncProcessReturn<T> {
-  const active: CreateAsyncProcessReturn<T>['active'] = ref(false)
 
-  const run: CreateAsyncProcessReturn<T>['run'] = async (...args) => {
-    active.value = true
-    const result = await fn(...args)
-    active.value = false
-    return result
-  }
+// import { Ref, ref } from 'vue'
 
-  return { active, run }
-}
+// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// interface CreateAsyncProcessReturn<T extends (...args: any[]) => any> {
+//   active: Ref<boolean>
+//   run: (...args: Parameters<T>) => Promise<ReturnType<T>>
+// }
+
+// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// export default function createAsyncProcess<T extends (...args: any[]) => any> (fn: T): CreateAsyncProcessReturn<T> {
+//   const active: CreateAsyncProcessReturn<T>['active'] = ref(false)
+
+//   const run: CreateAsyncProcessReturn<T>['run'] = async (...args) => {
+//     active.value = true
+//     const result = await fn(...args)
+//     active.value = false
+//     return result
+//   }
+
+//   return { active, run }
+// }

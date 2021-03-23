@@ -1,33 +1,41 @@
-<script lang="ts">
-import { useUsers } from '../services/useUsers'
-
-export default {
-async setup () {
-const { fetchUsers, userList, userCount } = useUsers()
-
-
-await fetchUsers()
-console.log(userList)
-return { userList, userCount}
-}
-}
-</script>
-
 <template>
 <div>
-<div
+  <div>{{userDetail}}</div>
+ <div
     v-if="userList.length === 0"
     class="article-preview"
   >
     No articles are here... yet.
   </div>
 
-<ul v-else>
+<ul >
     <li
     v-for="user in userList"
     :key="user.userId"
     >
-hello</li>
-</ul>
+{{ user.userName }}</li>
+</ul> 
 </div>
 </template>
+
+<script setup lang="ts">
+  import { useUsers, useUser } from '../services/useUsers'
+  import { asyncComputed, useTimeoutFn } from '@vueuse/core'
+  
+   const { fetchUsers, userList, userCount } = useUsers()
+  
+   const { fetchUser, userDetail } = useUser()
+
+    const userInfo = asyncComputed(
+  async() => {
+    useTimeoutFn(async () => {
+    await fetchUser()
+ await fetchUsers() }, 3000)
+  },
+   null // initial state
+ )
+
+
+
+   console.log(userList)
+  </script>
