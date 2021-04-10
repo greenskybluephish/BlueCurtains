@@ -2,31 +2,32 @@ import axios, { Method } from 'axios'
 
 
 const client = axios.create({
-    baseURL: 'https://localhost:5001/api/users',
+    baseURL: 'https://localhost:5001/api/',
     responseType: 'json'
     //, withCredentials: true
 })
 
 export default {
-    async execute(method: Method, resource: string, data?: any) {
+    async execute(method: Method, endpoint: string, resource: string,  data?: any) {
         return client({
             method,
-            url: resource,
+            url: endpoint + '/' + resource,
             data
-        }).then(req => {
-            return req.data
-        })
+        }).then(req => req.data)
     },
-    async getAll(): Promise<User[]> {
-        return await this.execute('get', '/')
+    async getAll(endpoint: string): Promise<any[]> {
+        return await this.execute('get', endpoint, '')
     },
-    async getById(id: number): Promise<User> {
-        return await this.execute('get', `/${id}`)
+    async getById(endpoint:string,id: number): Promise<any> {
+        return await this.execute('get', endpoint, `${id}`)
     },
-    async create(data: any) {
-        return await this.execute('post', '/', data)
+    async getByQuery(endpoint:string , query: string): Promise<any> {
+        return await this.execute('get', endpoint, `${query}`)
     },
-    async update(id: number, data: any) {
-        return await this.execute('put', `/${id}`, data)
+    async create(endpoint:string, data: any) {
+        return await this.execute('post',endpoint, '', data)
+    },
+    async update(endpoint:string, id: number, data: any) {
+        return await this.execute('put',endpoint, `${id}`, data)
     }
 }

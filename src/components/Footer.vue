@@ -1,8 +1,8 @@
 <template>
 <div>
-  <div>{{userDetail}}</div>
+  <!-- <div>{{showDetail}}</div> -->
  <div
-    v-if="userList.length === 0"
+    v-if="showList.length === 0"
     class="article-preview"
   >
     No articles are here... yet.
@@ -10,32 +10,34 @@
 
 <ul >
     <li
-    v-for="user in userList"
-    :key="user.userId"
+    v-for="show in showList"
+    :key="show.showId"
     >
-{{ user.userName }}</li>
+{{ show.showDateString }} - {{ show.venueName }} - {{ show.artistName }} 
+
+</li>
 </ul> 
 </div>
 </template>
 
 <script setup lang="ts">
-  import { useUsers, useUser } from '../services/useUsers'
+  import {  getShows, getShow } from '../services/showHandler'
   import { asyncComputed, useTimeoutFn } from '@vueuse/core'
   
-   const { fetchUsers, userList, userCount } = useUsers()
+   const { fetchShows, showList } = getShows()
   
-   const { fetchUser, userDetail } = useUser()
+   const { fetchShow, showDetail } = getShow()
 
-    const userInfo = asyncComputed(
+    const showsInfo = asyncComputed(
   async() => {
     useTimeoutFn(async () => {
-    await fetchUser()
- await fetchUsers() }, 3000)
+    await fetchShow(58)
+ await fetchShows() }, 1000)
   },
-   null // initial state
+   null 
  )
 
 
 
-   console.log(userList)
+   console.log(showList)
   </script>
