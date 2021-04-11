@@ -1,20 +1,20 @@
-declare interface User {
-      userId: number 
-      userName: string
-    userLogin:  string 
+declare interface Song {
+      songId: number 
+      songName: string
+    songLogin:  string 
      active: boolean 
-     userShift?: number 
-     userInitials: string 
+     songShift?: number 
+     songInitials: string 
      emailAddress: string  
      dateLastLogin?: Date 
-     userTitle: string  
+     songTitle: string  
 }
 
-declare interface UserResponse {
-    user: User
+declare interface SongResponse {
+    song: Song
 }
 
-declare interface UsersResponse {
-    users: User[]
-    usersCount: number
+declare interface SongsResponse {
+    songs: Song[]
+
 }

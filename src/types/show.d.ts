@@ -7,7 +7,7 @@ declare interface Show {
   venueCity: string
   venueState: string
   venueCountry: string
-    setlist: string[]
+    setlist: IdName[]
 }
 
 declare interface ShowResponse {

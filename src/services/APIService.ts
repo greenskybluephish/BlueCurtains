@@ -18,7 +18,7 @@ export default {
     async getAll(endpoint: string): Promise<any[]> {
         return await this.execute('get', endpoint, '')
     },
-    async getById(endpoint:string,id: number): Promise<any> {
+    async getById(endpoint:string, id: number): Promise<any> {
         return await this.execute('get', endpoint, `${id}`)
     },
     async getByQuery(endpoint:string , query: string): Promise<any> {

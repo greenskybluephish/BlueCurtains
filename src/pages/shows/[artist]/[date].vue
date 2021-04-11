@@ -9,9 +9,9 @@
 <ul >
     <li
     v-for="song in showDetail?.setlist"
-    :key="song"
+    :key="song.id"
     >  
- {{song.toString()}}
+ {{song.name}}
 </li></ul>
 
       <p class="text-sm opacity-50">
@@ -42,11 +42,11 @@
   const props = defineProps({
     date: {
       type: Date,
-      require: true
+      required: true
     },
     artist: {
-        type: String,
-        require: true
+        type: [String, Number],
+        required: true
     }
   })
 

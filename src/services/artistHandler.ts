@@ -28,7 +28,7 @@ export function getArtist() {
 
 
     async function fetchArtist(id: number) {
-        let query = id !== undefined ? id : 56;
+        let query = id !== undefined ? id : 1;
     const response = await API.getById('artists', query)
         artistDetail.value = response
 
@@ -45,9 +45,8 @@ export function getArtistShow() {
     const showDetail = ref<Show>()
 
 
-    async function fetchShow(id: number, date:Date) {
-        let artistId = id !== undefined ? id : 1;
-        let query = `${artistId}/${date}`
+    async function fetchShow(artist: number | string, date:Date) {
+        let query = `${artist}/${date}`
     const response = await API.getByQuery('artists', query)
         showDetail.value = response
 

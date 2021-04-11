@@ -1,20 +1,20 @@
 declare interface Artist {
     artistId: number 
     artistName: string
-  artistLogin:  string 
-   active: boolean 
-   artistShift?: number 
-   artistInitials: string 
-   emailAddress: string  
-   dateLastLogin?: Date 
-   artistTitle: string  
+    originalSongs: IdName[]
+    shows: Show[] 
 }
 
+
 declare interface ArtistResponse {
-  artist: artist
+  artist: Artist
 }
 
 declare interface ArtistsResponse {
-  artists: artist[]
-  artistsCount: number
+  artists: Artist[]
+}
+
+declare interface IdName {
+  id: number,
+  name: string
 }
