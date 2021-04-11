@@ -2,7 +2,9 @@
   import { getArtist} from '../../services/artistHandler'
   import { asyncComputed, useTimeoutFn } from '@vueuse/core'
   import { defineProps } from 'vue'
+  import { useRouter } from 'vue-router'
 
+    const router = useRouter()
 
   const props = defineProps({
      name: {
@@ -20,6 +22,12 @@
   },
    null 
  )
+
+ const goToShow = (showUrl:string) => {
+      let route = `/shows/1/${showUrl}`
+      console.log(route);
+       router.push(route)
+    }
 
   </script>
 
@@ -43,7 +51,7 @@
         :showDate="item.showDateString"
         :venueName="item.venueName"
         :venueLocale="item.venueCity"
-        
+        :goToShow="goToShow"
         
         ></ShowListItem>
     </ul> 

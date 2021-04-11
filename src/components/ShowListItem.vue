@@ -1,15 +1,13 @@
 <template>
         <li>
-   <button @click="goToShow">{{ showDate }}</button> 
+   <button @click="goToUrl">{{ showDate }}</button> 
    <p>{{ venueName }} - {{ venueLocale }}, {{ show.venueState}} </p>
         </li>
 </template>
 
 <script setup lang='ts'>
   import { defineProps } from 'vue'
-  import { useRouter } from 'vue-router'
 
-    const router = useRouter()
 
 
 
@@ -27,11 +25,16 @@
     },
     venueLocale: {
         type: String
+    },
+    goToShow: {
+        type:Function,
+        required: true
     }
   })
 
-  const goToShow = () => {
-        router.push(`shows/${props.show.artistId}/${encodeURIComponent(props.showDate)}`)
-    }
+  const goToUrl = () => {
+      let date = props.showDate.replaceAll('/', '-');
+      props.goToShow(date)
+  }
 
   </script>
