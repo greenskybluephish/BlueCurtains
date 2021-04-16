@@ -1,46 +1,35 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
+    import { ref } from 'vue'
+    import { useRouter } from 'vue-router'
+import APIService from '~/services/APIService'
+    const name = ref('')
+    const router = useRouter()
 
-const name = ref('')
-
-const router = useRouter()
-const go = () => {
-  if (name.value)
-    router.push(`/hi/${encodeURIComponent(name.value)}`)
-}
-
-const { t } = useI18n()
+    const getArtists = async () : Promise<Artist[]> => {
+     return await APIService.execute("GET", "artists/GetArtistDropdown", "")
+    }
+    const go = async () => {
+      let artists = await getArtists();
+      let artistNames = artists.map(a=> a.artistName.toUpperCase())
+      if (artistNames.includes(name.value.toUpperCase()))
+        router.push(`/artists/${encodeURIComponent(name.value)}`)
+     else 
+      console.log(artistNames.join())
+    }
 </script>
-
 <template>
-  <div>
-    <p class="text-4xl">
-      <carbon-campsite class="inline-block" />
-    </p>
-    <p>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
-        Vitesse
-      </a>
-    </p>
-    <p>
-      <em class="text-sm opacity-75">{{ t('intro.desc') }}</em>
-    </p>
-
-    <div class="py-4" />
-
+    <div>
     <input
       id="input"
       v-model="name"
-      :placeholder="t('intro.whats-your-name')"
+      :placeholder="'Search the database...'"
       type="text"
       autocomplete="false"
       class="px-4 py-2 text-sm text-center bg-transparent border border-gray-200 rounded outline-none active:outline-none dark:border-gray-700"
       style="width: 250px"
       @keydown.enter="go"
     >
-    <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
+    <label class="hidden" for="input">Search</label>
 
     <div>
       <button
@@ -48,7 +37,7 @@ const { t } = useI18n()
         :disabled="!name"
         @click="go"
       >
-        {{ t('button.go') }}
+        Go
       </button>
     </div>
   </div>

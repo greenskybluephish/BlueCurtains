@@ -7,9 +7,10 @@
   "dependencies": {
     "@vueuse/core": "^4.1.0",
     "@vueuse/head": "^0.2.3",
+    "axios": "^0.21.1",
     "nprogress": "^0.2.0",
     "prism-theme-vars": "^0.1.4",
-    "vue": "^3.0.5",
+    "vue": "^3.0.7",
     "vue-i18n": "^9.0.0-rc.6",
     "vue-router": "^4.0.3"
   },
@@ -21,7 +22,7 @@
     "@types/nprogress": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^4.15.0",
     "@vitejs/plugin-vue": "^1.1.4",
-    "@vue/compiler-sfc": "^3.0.5",
+    "@vue/compiler-sfc": "^3.0.7",
     "@vue/server-renderer": "^3.0.5",
     "autoprefixer": "^10.2.4",
     "cross-env": "^7.0.3",
