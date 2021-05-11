@@ -33,7 +33,7 @@
   import { useRouter } from 'vue-router'
   import { defineProps } from 'vue'
   import { getArtistShow } from '../../../services/artistHandler'
-  import { asyncComputed, useTimeoutFn } from '@vueuse/core'
+  import { asyncComputed } from '@vueuse/core'
 
   const { fetchShow, showDetail } = getArtistShow()
 
@@ -41,7 +41,7 @@
 
   const props = defineProps({
     date: {
-      type: Date,
+      type: String,
       required: true
     },
     artist: {
@@ -50,12 +50,10 @@
     }
   })
 
-  const showInfo = asyncComputed(
+ asyncComputed(
   async() => {
-    useTimeoutFn(async () => {
-    await fetchShow(props.artist, props.date) }, 2000)
-  },
-   null 
+    await fetchShow(props.artist, props.date) }
  )
+
   const router = useRouter()
   </script>

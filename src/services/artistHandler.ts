@@ -2,14 +2,13 @@ import { ref } from 'vue'
 import API from './APIService'
 
 export function getArtists() {
-
     const artistList = ref<Artist[]>([])
     const artistCount = ref(0)
 
     async function fetchArtists() {
-      artistList.value = []
+        artistList.value = []
 
-    const response = await API.getAll('artists')
+        const response = await API.getAll('artists')
         artistList.value = response
         artistCount.value = response.length
 
@@ -18,18 +17,18 @@ export function getArtists() {
     return {
         fetchArtists,
         artistList,
-        artistCount
+        artistCount,
     }
 }
 
 export function getArtist() {
-    
+
     const artistDetail = ref<Artist>()
 
 
     async function fetchArtist(id: number) {
         let query = id !== undefined ? id : 1;
-    const response = await API.getById('artists', query)
+        const response = await API.getById('artists', query)
         artistDetail.value = response
 
     }
@@ -41,13 +40,13 @@ export function getArtist() {
 }
 
 export function getArtistShow() {
-    
+
     const showDetail = ref<Show>()
 
 
-    async function fetchShow(artist: number | string, date:Date) {
+    async function fetchShow(artist: number | string, date: Date) {
         let query = `${artist}/${date}`
-    const response = await API.getByQuery('artists', query)
+        const response = await API.getByQuery('artists', query)
         showDetail.value = response
 
     }

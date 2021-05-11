@@ -1,24 +1,69 @@
-<script setup lang="ts">
-    import { ref } from 'vue'
-    import { useRouter } from 'vue-router'
+<script setup >
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import createSetlist from '~/services/parseService'
 import APIService from '~/services/APIService'
-    const name = ref('')
-    const router = useRouter()
+const name = ref('')
+const songs = ref('')
+const router = useRouter()
 
-    const getArtists = async () : Promise<Artist[]> => {
-     return await APIService.execute("GET", "artists/GetArtistDropdown", "")
-    }
-    const go = async () => {
-      let artists = await getArtists();
-      let artistNames = artists.map(a=> a.artistName.toUpperCase())
-      if (artistNames.includes(name.value.toUpperCase()))
-        router.push(`/artists/${encodeURIComponent(name.value)}`)
-     else 
-      console.log(artistNames.join())
-    }
+const getArtists = async() => {
+  return await APIService.execute('GET', 'artists/GetArtistDropdown', '')
+}
+const go = async() => {
+  const artists = await getArtists()
+  const artistNames = artists.map(a => a.artistName.toUpperCase())
+  if (artistNames.includes(name.value.toUpperCase()))
+    router.push(`/artists/${encodeURIComponent(name.value)}`)
+  else
+    console.log(artistNames.join())
+}
+
+//     const createSetlist = (data) => {
+// const setObject = data.split("(").map(s, setIndex => {
+//     const set = s.split(") ")[1];
+//     const normalizedSet = set.replaceAll(" ->", "%,");
+//     const songs = normalizedSet.split(", ");
+
+//     const songObjects = songs.map(song, songIndex => {
+//     const segueSong = songString.endsWith("%");
+//     const trimmedSong = segueSong ? songString :  songString.split("%")[0];
+//     return {
+//         songName: trimmedSong,
+//         segue: segueSong,
+//         songIndex: songIndex+1}
+//     });
+//     return { set: songObjects, index: i+1 }
+// });
+// return setObject;
+// }
+
+const postSetList = (data) => {
+  const d = document.querySelector('#setlist')
+  const setHTML = data.forEach((setObj, i) => {
+    const set = setObj.set
+    const list = document.createElement('ol')
+    list.textContent = `Set ${i + 1}`
+
+    set.forEach((element, int) => {
+      const song = document.createElement('li')
+      song.textContent = `${int + 1}. ${element.songName}`
+      list.append(song)
+    })
+
+    d.append(list)
+  })
+}
+
+const parse = () => {
+  const songlist = createSetlist(songs.value)
+  console.log(songlist)
+  postSetList(songlist)
+}
+
 </script>
 <template>
-    <div>
+  <div>
     <input
       id="input"
       v-model="name"
@@ -41,4 +86,31 @@ import APIService from '~/services/APIService'
       </button>
     </div>
   </div>
+
+  <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+    <label for="parse-setlist" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+      Drop Setlists
+    </label>
+    <div class="mt-1 sm:mt-0 sm:col-span-2">
+      <textarea
+        id="parse-setlist"
+        v-model="songs"
+        name="parse-setlist"
+
+        class="max-w-xl shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+      />
+
+      <p class="mt-2 text-sm text-gray-500">
+        We'll turn it into a show.
+      </p>
+    </div>
+  </div>
+  <div class="pt-5">
+    <div class="flex justify-end">
+      <button class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="parse">
+        Transform
+      </button>
+    </div>
+  </div>
+  <div id="setlist" />
 </template>

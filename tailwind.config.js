@@ -23,10 +23,10 @@ module.exports = {
       borderColor: ['active', 'disabled'],
       textColor: ['active', 'disabled'],
       opacity: ['dark', 'active', 'disabled'],
-    }
+    },
   },
   darkMode: 'class',
-  plugins: [typography],
+  plugins: [typography, require('@tailwindcss/forms')],
   theme: {
     extend: {
       colors: {
