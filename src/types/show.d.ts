@@ -1,13 +1,13 @@
 declare interface Show {
-    showId: number 
-    venueName: string
-  showDateString:  string 
+  showId: number
+  venueName: string
+  showDateString: string
   artistName: string
   artistId: number
   venueCity: string
   venueState: string
   venueCountry: string
-    setlist: IdName[]
+  setlist: IdName[]
 }
 
 declare interface ShowResponse {
@@ -17,4 +17,9 @@ declare interface ShowResponse {
 declare interface ShowsResponse {
   Shows: Show[]
   ShowsCount: number
+}
+
+declare interface DropdownListItem {
+  id: number
+  name: string
 }

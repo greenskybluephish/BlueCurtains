@@ -1,33 +1,26 @@
 <template>
-  <Disclosure v-slot="{ open }" as="nav" class="bg-gray-800">
-    <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+  <Disclosure v-slot="{ open }" as="nav" class="">
+    <div class="max-w-10xl mx-auto px-2 sm:px-4 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
-        <div class="flex items-center px-2 lg:px-0">
-          <div class="flex-shrink-0">
-            <img class="block lg:hidden h-8 w-auto" src="~/tDB-Header-White.png" alt="The Disco Biscuits" />
-            <img class="hidden lg:block h-8 w-auto" src="~/tDB-Header-White.png" alt="The Disco Biscuits" />
-          </div>
-          <div class="hidden lg:block lg:ml-6">
-            <div class="flex space-x-4">
-              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Shows</a>
-              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">News</a>
-              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Media</a>
-            </div>
+        <div class="flex-shrink-0">
+          <img class="absolute dark:opacity-100 opacity-0 h-10 w-auto dark:bg-transparent" src="../../public/logo.png" alt="The Disco Biscuits">
+          <img class="dark:opacity-0  h-10 w-auto bg-transparent dark:bg-gray-200" src="../../public/logo_dark.png" alt="The Disco Biscuits">
+        </div>
+
+        <div class="hidden lg:block lg:ml-6 lg:justify-end">
+          <div class="flex space-x-4 justify-end">
+            <a
+              v-for="item in navigation"
+              :key="item.name"
+              :href="item.href"
+              class="text-gray-800 hover:bg-gray-700 hover:text-white px-3 dark:hover:text-white dark:text-gray-800 py-2 rounded-md text-sm font-medium"
+              :aria-current="item.current ? 'page' : undefined"
+            >
+              {{ item.name }}
+            </a>
           </div>
         </div>
-        <div class="flex-1 flex justify-center px-2 lg:ml-6 lg:justify-end">
-          <div class="max-w-lg w-full lg:max-w-xs">
-            <label for="search" class="sr-only">Search</label>
-            <div class="relative">
-              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <SearchIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-              </div>
-              <input id="search" name="search" class="block w-full pl-10 pr-3 py-2 border border-transparent rounded-md leading-5 bg-gray-700 text-gray-300 placeholder-gray-400 focus:outline-none focus:bg-white focus:border-white focus:ring-white focus:text-gray-900 sm:text-sm" placeholder="Search" type="search">
-            </div>
-          </div>
-        </div>
+
         <div class="flex lg:hidden">
           <!-- Mobile menu button -->
           <DisclosureButton class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
@@ -36,7 +29,7 @@
             <XIcon v-else class="block h-6 w-6" aria-hidden="true" />
           </DisclosureButton>
         </div>
-        <div class="hidden lg:block lg:ml-4">
+        <div class="hidden lg:ml-4">
           <div class="flex items-center">
             <button class="flex-shrink-0 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
               <span class="sr-only">View notifications</span>
@@ -47,7 +40,7 @@
               <div>
                 <MenuButton class="bg-gray-800 rounded-full flex text-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                   <span class="sr-only">Open user menu</span>
-                  <carbon-menu />
+                  <MenuIcon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
                 </MenuButton>
               </div>
               <transition
@@ -114,6 +107,15 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { SearchIcon } from '@heroicons/vue/solid'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
 
+const navigation = [
+  { name: 'Shows', href: '#', current: true },
+  { name: 'News', href: '#', current: false },
+  { name: 'Albums', href: '#', current: false },
+  { name: 'Videos', href: '#', current: false },
+  { name: 'Photos', href: '#', current: false },
+  { name: 'Store', href: '#', current: false },
+]
+
 export default {
   components: {
     Disclosure,
@@ -125,7 +127,6 @@ export default {
     MenuItems,
     BellIcon,
     MenuIcon,
-    SearchIcon,
     XIcon,
   },
   setup() {
@@ -133,6 +134,7 @@ export default {
 
     return {
       open,
+      navigation,
     }
   },
 }

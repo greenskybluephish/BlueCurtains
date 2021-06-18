@@ -1,4 +1,4 @@
-<script setup >
+<script setup lang='ts'>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import createSetlist from '~/services/parseService'
@@ -6,46 +6,28 @@ import APIService from '~/services/APIService'
 const name = ref('')
 const songs = ref('')
 const router = useRouter()
+const venues = []
 
 const getArtists = async() => {
   return await APIService.execute('GET', 'artists/GetArtistDropdown', '')
 }
 const go = async() => {
   const artists = await getArtists()
-  const artistNames = artists.map(a => a.artistName.toUpperCase())
+  const artistNames = artists.map((a: { artistName: string }) => a.artistName.toUpperCase())
   if (artistNames.includes(name.value.toUpperCase()))
     router.push(`/artists/${encodeURIComponent(name.value)}`)
   else
     console.log(artistNames.join())
 }
 
-//     const createSetlist = (data) => {
-// const setObject = data.split("(").map(s, setIndex => {
-//     const set = s.split(") ")[1];
-//     const normalizedSet = set.replaceAll(" ->", "%,");
-//     const songs = normalizedSet.split(", ");
-
-//     const songObjects = songs.map(song, songIndex => {
-//     const segueSong = songString.endsWith("%");
-//     const trimmedSong = segueSong ? songString :  songString.split("%")[0];
-//     return {
-//         songName: trimmedSong,
-//         segue: segueSong,
-//         songIndex: songIndex+1}
-//     });
-//     return { set: songObjects, index: i+1 }
-// });
-// return setObject;
-// }
-
-const postSetList = (data) => {
+const postSetList = (data: any) => {
   const d = document.querySelector('#setlist')
-  const setHTML = data.forEach((setObj, i) => {
+  data.forEach((setObj: any, i: any) => {
     const set = setObj.set
     const list = document.createElement('ol')
     list.textContent = `Set ${i + 1}`
 
-    set.forEach((element, int) => {
+    set.forEach((element: any, int: number) => {
       const song = document.createElement('li')
       song.textContent = `${int + 1}. ${element.songName}`
       list.append(song)
@@ -112,5 +94,7 @@ const parse = () => {
       </button>
     </div>
   </div>
+
+  <DropdownList />
   <div id="setlist" />
 </template>

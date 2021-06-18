@@ -6,12 +6,11 @@ const data = `(4:00PM - 5:15PM) Spider Bite, Skydiver, Birds of a Feather, Ruby,
  Secret Place, Up in the Clouds`
 
 const createSetlist = (data) => {
-  console.log(data)
   const setArray = data.split(/\(|\)/)
   const reduced = setArray.filter((val, index) => {
     return index % 2 === 0 && index > 0
   })
-  console.log(reduced)
+
   const setObject = reduced.map((set, setIndex) => {
     const normalizedSet = set.replaceAll(' ->', '%,')
     const songs = normalizedSet.split(', ')

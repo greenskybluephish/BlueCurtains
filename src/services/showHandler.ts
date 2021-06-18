@@ -34,3 +34,7 @@ export function getShow() {
     showDetail,
   }
 }
+
+export async function postShow(show: Show): Promise<void> {
+  await API.create('shows', show)
+}
