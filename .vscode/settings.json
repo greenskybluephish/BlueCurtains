@@ -6,5 +6,5 @@
     "Vitesse",
     "xsrf"
   ],
-  "volar.tsPlugin": true
+  "volar.tsPlugin": false
 }

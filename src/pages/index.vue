@@ -1,13 +1,15 @@
 <script setup lang="ts">
     import { ref } from 'vue'
     import { useRouter } from 'vue-router'
-import APIService from '~/services/APIService'
+    import APIService from '../services/APIService'
+
     const name = ref('')
     const router = useRouter()
 
     const getArtists = async () : Promise<Artist[]> => {
      return await APIService.execute("GET", "artists/GetArtistDropdown", "")
     }
+
     const go = async () => {
       let artists = await getArtists();
       let artistNames = artists.map(a=> a.artistName.toUpperCase())

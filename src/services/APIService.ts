@@ -13,7 +13,7 @@ export default {
             method,
             url: endpoint + '/' + resource,
             data
-        }).then(req => req.data)
+        }).then((req: any) => req.data)
     },
     async getAll(endpoint: string): Promise<any[]> {
         return await this.execute('get', endpoint, '')
