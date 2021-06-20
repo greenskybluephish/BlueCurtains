@@ -13,11 +13,17 @@ useHead({
 </script>
 
 <template>
-  <div>
+  <div class="h-full">
     <Navbar />
-    <main class="px-4 py-10 text-center text-gray-700 dark:text-gray-200 ">
+    <main class="text-center text-gray-700 dark:text-gray-200 h-screen  ">
       <router-view />
-      <Footer />
     </main>
+    <Footer class="text-gray-200 bottom-0 w-full relative dark:text-gray-200" />
   </div>
 </template>
+
+<style scoped>
+.background {
+  background-color: rgb(230, 230, 230)
+}
+</style>

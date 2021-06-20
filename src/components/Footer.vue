@@ -1,5 +1,5 @@
 <template>
-  <nav class="text-xl mt-6 flex justify-evenly">
+  <nav class="text-xl pt-6 pb-10 -mb-4 footer14 flex justify-evenly">
     <a class="icon-btn mx-2" :title="'Toggle dark mode'" @click="isDark = !isDark">
       <carbon-moon v-if="isDark" />
       <carbon-sun v-else />
@@ -8,16 +8,16 @@
       <simple-icons-facebook />
     </a>
     <a class="icon-btn mx-2" rel="noreferrer" href="https://www.instagram.com/airshowband/" target="_blank" :title="'Instagram'">
-      <simple-icons-instagram/>
+      <simple-icons-instagram />
     </a>
     <a class="icon-btn mx-2" rel="noreferrer" href="https://twitter.com/airshowband" target="_blank" :title="'Twitter'">
-      <simple-icons-twitter/>
+      <simple-icons-twitter />
     </a>
     <a class="icon-btn mx-2" rel="noreferrer" href="https://www.youtube.com/channel/UCH0GV4YdDN__fjF_i_bpvSw" target="_blank" :title="'YouTube'">
-      <simple-icons-youtube/>
+      <simple-icons-youtube />
     </a>
     <a class="icon-btn mx-2" rel="noreferrer" href="https://archive.org/details/AirshowBand" target="_blank" :title="'Archive'">
-      <simple-icons-internetarchive/>
+      <simple-icons-internetarchive />
     </a>
   </nav>
 </template>
@@ -26,3 +26,12 @@
 import { isDark } from '~/logics'
 
 </script>
+
+<style scoped>
+.background {
+  background-color: rgb(230, 230, 230)
+}
+.footer14 {
+  background-color: #165B6A;
+}
+</style>

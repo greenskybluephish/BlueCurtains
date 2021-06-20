@@ -1,17 +1,19 @@
-declare interface IdName {
+import { Show } from './show'
+
+export interface IdName {
   id: number
   name: string
 }
-declare interface Artist {
+export interface Artist {
   artistId: number
   artistName: string
   originalSongs: IdName[]
   shows: Show[]
 }
-declare interface ArtistResponse {
+export interface ArtistResponse {
   artist: Artist
 }
 
-declare interface ArtistsResponse {
+export interface ArtistsResponse {
   artists: Artist[]
 }

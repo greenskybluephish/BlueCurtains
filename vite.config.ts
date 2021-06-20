@@ -10,8 +10,10 @@ import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Prism from 'markdown-it-prism'
 
 export default defineConfig({
-  alias: {
-    '~/': `${path.resolve(__dirname, 'src')}/`,
+  resolve: {
+    alias: {
+      '~/': `${path.resolve(__dirname, 'src')}/`,
+    },
   },
   plugins: [
     Vue({
@@ -56,7 +58,7 @@ export default defineConfig({
 
     // https://github.com/antfu/vite-plugin-pwa
     VitePWA({
-      inlineRegister: false,
+      injectRegister: false,
       manifest: {
         name: 'Vitesse',
         short_name: 'Vitesse',

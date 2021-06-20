@@ -1,4 +1,6 @@
-declare interface Show {
+import { IdName } from './artist'
+
+export interface Show {
   showId: number
   venueName: string
   showDateString: string
@@ -10,16 +12,16 @@ declare interface Show {
   setlist: IdName[]
 }
 
-declare interface ShowResponse {
+export interface ShowResponse {
   Show: Show
 }
 
-declare interface ShowsResponse {
+export interface ShowsResponse {
   Shows: Show[]
   ShowsCount: number
 }
 
-declare interface DropdownListItem {
+export interface DropdownListItem {
   id: number
   name: string
 }

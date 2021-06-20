@@ -3,8 +3,11 @@
     <div class="max-w-10xl mx-auto px-2 sm:px-4 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
         <div class="flex-shrink-0">
-          <img class="absolute dark:opacity-100 opacity-0 h-10 w-auto dark:bg-transparent" src="../../public/logo.png" alt="The Disco Biscuits">
-          <img class="dark:opacity-0  h-10 w-auto bg-transparent dark:bg-gray-200" src="../../public/logo_dark.png" alt="The Disco Biscuits">
+          <!-- <p class="text-gray-700 dark:text-gray-200 md title-font">
+    AIRSHOW
+  </p> -->
+          <!-- <img class="absolute dark:opacity-100 opacity-0 h-10 w-auto dark:bg-transparent" src="../../public/logo.png" alt="The Disco Biscuits">
+          <img class="dark:opacity-0  h-10 w-auto bg-transparent dark:bg-gray-200" src="../../public/logo_dark.png" alt="The Disco Biscuits"> -->
         </div>
 
         <div class="hidden lg:block lg:ml-6 lg:justify-end">
@@ -13,14 +16,13 @@
               v-for="item in navigation"
               :key="item.name"
               :href="item.href"
-              class="text-gray-800 hover:bg-gray-700 hover:text-white px-3 dark:hover:text-white dark:text-gray-800 py-2 rounded-md text-sm font-medium"
+              class="text-gray-800 hover:bg-gray-700 hover:text-white px-3 dark:hover:text-white dark:text-gray-200 py-2 rounded-md text-sm font-medium"
               :aria-current="item.current ? 'page' : undefined"
             >
               {{ item.name }}
             </a>
           </div>
         </div>
-
         <div class="flex lg:hidden">
           <!-- Mobile menu button -->
           <DisclosureButton class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
@@ -101,8 +103,8 @@
     </DisclosurePanel>
   </Disclosure>
 </template>
-<script>
-import { ref } from 'vue'
+<script setup>
+import { ref, useContext } from 'vue'
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { SearchIcon } from '@heroicons/vue/solid'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
@@ -116,26 +118,13 @@ const navigation = [
   { name: 'Store', href: '#', current: false },
 ]
 
-export default {
-  components: {
-    Disclosure,
-    DisclosureButton,
-    DisclosurePanel,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems,
-    BellIcon,
-    MenuIcon,
-    XIcon,
-  },
-  setup() {
     const open = ref(false)
 
-    return {
-      open,
-      navigation,
-    }
-  },
-}
+
 </script>
+
+<style>
+  .title-font {
+    font-family: Braggadocio;
+  }
+</style>
